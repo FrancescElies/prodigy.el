@@ -257,6 +257,23 @@
          (should (string= (buffer-string) "bar")))))))
 
 
+;;;; prodigy-clear-underlying-buffers
+
+;; (ert-deftest-async prodigy-clear-underlying-buffers/ready-message/clear (done)
+;;                    (with-sandbox
+;;                     (let ((service (prodigy-test/make-service
+;;                                     :ready-message "Ready!")))
+;;                       (prodigy-start-service service
+;;                         (lambda ()
+;;                           (prodigy-test/post-message service 'log "I am Ready!")
+;;                           (prodigy-clear-underlaying-buffer)
+;;                           (prodigy-test/delay 0.1
+;;                                               (lambda ()
+;;                                                 (output (plist-get args :output))
+;;                                                 (should (eq (plist-get service :output) ""))
+;;                                                 (prodigy-stop-service service nil done))))))))
+
+
 ;;;; prodigy-restart-service
 
 (ert-deftest-async prodigy-restart-service-test/not-started (done)
