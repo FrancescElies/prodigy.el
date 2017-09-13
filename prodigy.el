@@ -273,7 +273,8 @@ Supported filters:
   [("Marked" 6 t :right-align t)
    ("Name" 35 t)
    ("Status" 15 t)
-   ("Tags" 25 nil)]
+   ("Tags" 25 nil)
+   ("Branch" 25 t)]
   "List format.")
 
 (defconst prodigy-list-sort-key
@@ -871,6 +872,13 @@ accordingly."
                       (plist-get (prodigy-find-tag it) :hide)
                       (plist-get service :tags)))))
 
+(defun prodigy-branch-col (service)
+  "Return SERVICE git branch"
+  (-if-let (default-directory (prodigy-service-cwd service))
+      (or (magit-get-current-branch)
+          "")
+    ""))
+
 (defun prodigy-list-entries ()
   "Create the entries for the service list."
   (-map
@@ -883,7 +891,8 @@ accordingly."
               '(prodigy-marked-col
                 prodigy-name-col
                 prodigy-status-col
-                prodigy-tags-col)))))
+                prodigy-tags-col
+                prodigy-branch-col)))))
    (prodigy-services)))
 
 (defun prodigy-service-at-pos (&optional pos)
