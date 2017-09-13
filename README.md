@@ -94,6 +94,21 @@ process output. Each function in the hook takes two arguments,
 `service` (the service data structure) and `output` (the service's
 output).
 
+### Columns
+In the `*prodigy*` buffer, you will always see a table with the following columns.
+  - **Marked**: Services that you want to perform an action on.
+  - **Name**: Service name.
+  - **Status**: Service status.
+  - **Tags**: Service associated tags.
+
+Edit `prodigy-custom-list-columns` to add your own columns, e.g.
+```lisp
+(setq prodigy-custom-list-columns
+   (quote
+    ((:function my-function :format
+                ("My Column Name" 25 t)))))
+```
+
 ### Tags
 
 Services can have any number of tags. Tags do not have to be
